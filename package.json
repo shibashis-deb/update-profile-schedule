@@ -5,6 +5,7 @@
   "scripts": {
     "start": "ts-node src/index.ts",
     "schedule": "ts-node src/scheduler.ts",
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
