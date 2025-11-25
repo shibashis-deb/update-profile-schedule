@@ -7,10 +7,16 @@ import { updateProfile } from './profile';
   try {
     validateConfig();
 
+    const isProduction = process.env.NODE_ENV === 'production';
+    
     const browser = await chromium.launch({ 
-      headless: false,
-      channel: 'chrome',
-      args: ['--disable-blink-features=AutomationControlled']
+      headless: isProduction ? true : false,
+      channel: isProduction ? undefined : 'chrome', // Use bundled chromium in prod, local chrome in dev
+      args: [
+        '--disable-blink-features=AutomationControlled',
+        '--no-sandbox', 
+        '--disable-setuid-sandbox'
+      ]
     });
     const context = await browser.newContext();
     const page = await context.newPage();
