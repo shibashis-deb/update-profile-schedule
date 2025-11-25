@@ -29,6 +29,7 @@ import { updateProfile } from './profile';
     } catch (error) {
       console.error('An error occurred during execution:', error);
       await page.screenshot({ path: 'error.png' });
+      process.exit(1);
     } finally {
       await browser.close();
     }

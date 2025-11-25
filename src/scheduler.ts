@@ -31,3 +31,13 @@ runUpdate();
 setInterval(runUpdate, INTERVAL_MS);
 
 console.log(`Scheduler started. Running every ${INTERVAL_HOURS} hours.`);
+
+// Start a dummy server to satisfy Render's port binding requirement
+import http from 'http';
+const port = process.env.PORT || 3000;
+http.createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  res.end('Scheduler is running\n');
+}).listen(port, () => {
+  console.log(`Dummy server listening on port ${port}`);
+});

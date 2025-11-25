@@ -5,7 +5,9 @@ export async function login(page: Page, email: string, password: string): Promis
   await page.goto('https://www.naukri.com/');
 
   console.log('Clicking "Login" button on navbar...');
-  await page.click('#login_Layer');
+  const loginButton = page.locator('#login_Layer');
+  await loginButton.waitFor({ state: 'visible', timeout: 30000 });
+  await loginButton.click();
 
   console.log('Clicking "Login with Google"...');
   const googleLoginButton = page.locator('.social-login-btn.google-login, button:has-text("Google"), .google-icon');
